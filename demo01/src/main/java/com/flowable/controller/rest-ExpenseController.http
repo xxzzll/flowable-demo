@@ -1,0 +1,29 @@
+#####################################Handler 处理操作如下####################################
+# 1.申请报销
+GET http://localhost:8001/expense/add?userId=123&money=1000
+Accept: *
+# 返回结果 提交成功.流程Id为：2501
+###
+
+# 2.查询审批列表
+GET http://localhost:8001/expense/list?userId=123
+Accept: *
+# 返回结果 task info:Task[id=2507, name=出差报销]
+###
+
+# 3.批准
+GET http://localhost:8001/expense/apply?taskId=2507
+Accept: *
+# 返回结果 processed ok!
+###
+
+# 4.驳回
+GET http://localhost:8001/expense/reject?taskId=123
+Accept: *
+# 返回结果
+###
+
+# 5.生成流程图
+GET http://localhost:8001/expense/processDiagram?processId=2501
+Accept: *
+###

@@ -1,0 +1,56 @@
+@startuml
+
+interface Logger
+abstract class AbstractLogger
+class ErrorLogger
+class WarnLogger
+class InfoLogger
+class DebugLogger
+
+AbstractLogger .up.|> Logger
+ErrorLogger -up-|> AbstractLogger
+WarnLogger -up-|> AbstractLogger
+InfoLogger -up-|> AbstractLogger
+DebugLogger -up-|> AbstractLogger
+
+
+interface Logger {
+    +void excute(String message, int msgLevel) throws Exception;
+    +Logger getNext();
+    +void setNext(Logger logger) throws Exception;
+}
+
+abstract class AbstractLogger {
+    #Logger next; -- 日志类的一个节点
+    #int configLevel; -- 日志等级
+    +AbstractLogger(int configLevel) throws Exception;
+}
+
+class ErrorLogger {
+    +{static}final int level = 4;
+    +ErrorLogger(int configLevel) throws Exception;
+    +void excute(String message, int msgLevel);
+}
+
+class WarnLogger {
+    +{static}final int level = 3;
+    +WarnLogger(int configLevel) throws Exception;
+    +void excute(String message, int msgLevel);
+}
+
+class InfoLogger {
+    +{static}final int level = 2;
+    +InfoLogger(int configLevel) throws Exception;
+    +void excute(String message, int msgLevel);
+}
+
+class DebugLogger {
+    +{static}final int level = 1;
+    +DebugLogger(int configLevel) throws Exception;
+    +void excute(String message, int msgLevel);
+    +Logger getNext();
+    +void setNext(Logger logger) throws Exception;
+}
+
+
+@enduml
