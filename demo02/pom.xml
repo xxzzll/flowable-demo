@@ -11,4 +11,32 @@
 
     <artifactId>demo02</artifactId>
 
+    <properties>
+        <flowable.version>6.3.0</flowable.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.flowable</groupId>
+            <artifactId>flowable-engine</artifactId>
+            <version>${flowable.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- slf4j日志支持 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+    </dependencies>
 </project>

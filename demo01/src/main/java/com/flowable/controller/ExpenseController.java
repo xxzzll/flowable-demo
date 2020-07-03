@@ -1,5 +1,6 @@
 package com.flowable.controller;
 
+import net.sf.json.JSONArray;
 import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.engine.*;
 import org.flowable.engine.runtime.Execution;
@@ -29,7 +30,7 @@ public class ExpenseController {
     private RepositoryService repositoryService;
     @Autowired
     private ProcessEngine processEngine;
- 
+
     /***************此处为业务代码******************/
 
     /**
@@ -57,10 +58,13 @@ public class ExpenseController {
     @ResponseBody
     public Object list(String userId) {
         List<Task> tasks = taskService.createTaskQuery().taskAssignee(userId).orderByTaskCreateTime().desc().list();
+        List<String> list = new ArrayList<>();
         for (Task task : tasks) {
-            System.out.println("task info:" + task.toString());
+            System.out.println(task.toString());
+            list.add(task.toString());
         }
-        return tasks.toArray().toString();
+        JSONArray jsonArray = JSONArray.fromObject(list);
+        return jsonArray;
     }
 
     /**
