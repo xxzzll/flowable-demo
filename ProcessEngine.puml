@@ -1,0 +1,39 @@
+@startuml
+
+interface ProcessEngine
+class ProcessEngineImpl
+
+ProcessEngineImpl .up.|> ProcessEngine
+
+interface ProcessEngine {
+     +{abstract} RepositoryService getRepositoryService();
+     +{abstract} RuntimeService getRuntimeService();
+     +{abstract} FormService getFormService();
+     +{abstract} TaskService getTaskService();
+     +{abstract} HistoryService getHistoryService();
+     +{abstract} IdentityService getIdentityService();
+     +{abstract} ManagementService getManagementService();
+     +{abstract} DynamicBpmnService getDynamicBpmnService();
+     +{abstract} ProcessEngineConfiguration getProcessEngineConfiguration();
+}
+
+class ProcessEngineImpl {
+    #RepositoryService repositoryService;
+    #RuntimeService runtimeService;
+    #HistoryService historicDataService;
+    #IdentityService identityService;
+    #TaskService taskService;
+    #FormService formService;
+    #ManagementService managementService;
+    #DynamicBpmnService dynamicBpmnService;
+    #ProcessEngineConfigurationImpl processEngineConfiguration;
+    ----------------------------------------------------------
+    #AsyncExecutor asyncExecutor;
+    #AsyncExecutor asyncHistoryExecutor;
+    #CommandExecutor commandExecutor;
+    #Map<Class<?>, SessionFactory> sessionFactories;
+    #TransactionContextFactory transactionContextFactory;
+    ========================================================
+    +ProcessEngineImpl(ProcessEngineConfigurationImpl processEngineConfiguration);
+}
+@enduml

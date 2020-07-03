@@ -1,0 +1,27 @@
+@startuml
+
+interface CommandExecutor
+class CommandExecutorImpl
+
+interface Command<T>
+
+CommandExecutor -right-> Command
+note right of Command : 基础服务命令，其下有很多实现子类，实现不同功能的命令接口，\n 来完成 flowable 核心服务（RepositoryService、RuntimeService、\n TaskService、HistoryService...）功能的实现。
+
+CommandExecutorImpl .up.|> CommandExecutor
+
+interface CommandExecutor {
+    + {abstract} CommandConfig getDefaultConfig();
+    + {abstract} <T> T execute(CommandConfig var1, Command<T> var2);
+    + {abstract} <T> T execute(Command<T> var1);
+}
+
+class CommandExecutorImpl {
+    # CommandConfig defaultConfig;
+    # CommandInterceptor first;
+    + <T> T execute(Command<T> command);
+    + <T> T execute(CommandConfig config, Command<T> command)
+}
+
+
+@enduml

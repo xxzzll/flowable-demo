@@ -1,0 +1,37 @@
+@startuml
+
+namespace org.flowable.xx {
+    interface SpringEngineConfiguration
+    interface HasTaskIdGeneratorEngineConfiguration
+    abstract class AbstractEngineConfiguration
+    abstract class ProcessEngineConfiguration
+    abstract class ProcessEngineConfigurationImpl
+
+    class StandaloneProcessEngineConfiguration
+    class SpringProcessEngineConfiguration
+
+    ProcessEngineConfiguration -up-|> AbstractEngineConfiguration
+    ProcessEngineConfiguration .up.|> HasTaskIdGeneratorEngineConfiguration
+    ProcessEngineConfigurationImpl -up-|> ProcessEngineConfiguration
+
+    StandaloneProcessEngineConfiguration -up-|> ProcessEngineConfigurationImpl
+
+    SpringProcessEngineConfiguration -left-|> ProcessEngineConfigurationImpl
+    HasTaskIdGeneratorEngineConfiguration -left[hidden]- SpringEngineConfiguration
+    SpringProcessEngineConfiguration .up.|> SpringEngineConfiguration
+    SpringEngineConfiguration -up-|> org.springframework.context.ApplicationContextAware
+    SpringEngineConfiguration -up-|> org.springframework.context.SmartLifecycle
+
+    abstract class ProcessEngineConfigurationImpl {
+        ----------------组合了以下核心类--------------
+        # RepositoryService repositoryService  = new RepositoryServiceImpl();
+        # RuntimeService runtimeService  = new RuntimeServiceImpl();
+        # HistoryService historyService  = new HistoryServiceImpl(this);
+        # IdentityService identityService  = new IdentityServiceImpl(this);
+        # TaskService taskService  = new TaskServiceImpl(this);
+        # FormService formService  = new FormServiceImpl();
+        # ManagementService managementService  = new ManagementServiceImpl();
+        # DynamicBpmnService dynamicBpmnService  = new DynamicBpmnServiceImpl(this);
+    }
+}
+@enduml
