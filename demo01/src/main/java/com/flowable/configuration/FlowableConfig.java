@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * desc: flowable配置----为放置生成的流程图中中文乱码
+ *
+ * hahaha
  */
 @Configuration
 public class FlowableConfig implements EngineConfigurationConfigurer<SpringProcessEngineConfiguration> {
